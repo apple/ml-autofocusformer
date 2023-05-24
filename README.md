@@ -45,7 +45,7 @@ Notably, AFF-Small achieves **44.0** instance segmentation AP and **66.9** panop
 | AFF-Mini-1/5 | ImageNet-1K | 224x224 | 77.5 | 93.3 | 6.75M | 0.72G | 1678 | [Box](https://apple.box.com/s/aib6y9l5xywo8zi3xy7gce03m4opmmyv) |
 | AFF-Tiny | ImageNet-1K | 224x224 | 83.0 | 96.3 | 27M | 4G | 528 | [Box](https://apple.box.com/s/084xbpfsjpn3mkv5xiqyyls4pf3vsg6r) |
 | AFF-Tiny-1/5 | ImageNet-1K | 224x224 | 82.4 | 95.9 | 27M | 2.74G | 682 | [Box](https://apple.box.com/s/vg45luh144kbcv7dukgp6tsn0qv0z7ao) |
-| AFF-Small | ImageNet-1K | 224x224 | 83.5 | 96.6 | 42.6M | 8.16G | 321 | [Box](https://apple.box.com/s/0juca47b667c91gaa0cz68jrfp7s69lm) |
+| AFF-Small | ImageNet-1K | 224x224 | 83.5 | 96.6 | 42.6M | 8.16G | 321 | [Box](https://apple.box.com/s/yxy1gfhs4b973zvqawlrjgsi50t3fr89) |
 | AFF-Small-1/5 | ImageNet-1K | 224x224 | 83.4 | 96.5 | 42.6M | 5.69G | 424 | [Box](https://apple.box.com/s/m3ylsmst93m4xtmb1v7f046ncj64zufa) |
 
 FPS is obtained on a single V100 GPU.
