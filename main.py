@@ -46,7 +46,7 @@ def parse_option():
     # easy config modification
     parser.add_argument('--batch-size', type=int, help="batch size per GPU")
     parser.add_argument('--epochs', type=int, help="number of epochs")
-    parser.add_argument('--blr', type=float, default=5e-4, help='base learning rate: absolute_lr = base_lr * total_batch_size / 512')
+    parser.add_argument('--blr', type=float, help='base learning rate: absolute_lr = base_lr * total_batch_size / 512')
     parser.add_argument('--data-path', type=str, help='path to dataset')
     parser.add_argument('--resume', help='resume from checkpoint')
     parser.add_argument('--accumulation-steps', type=int, help="gradient accumulation steps")
