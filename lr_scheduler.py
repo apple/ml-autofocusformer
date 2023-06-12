@@ -59,7 +59,7 @@ def build_scheduler(config, optimizer, n_iter_per_epoch):
             t_in_epochs=False,
         )
 
-    return lr_scheduler, num_epochs
+    return lr_scheduler
 
 
 class LinearLRScheduler(Scheduler):

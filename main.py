@@ -111,9 +111,9 @@ def main(config, logger):
 
     # build scheduler
     if config.TRAIN.ACCUMULATION_STEPS > 1:
-        lr_scheduler, num_epochs = build_scheduler(config, optimizer, len(data_loader_train) // config.TRAIN.ACCUMULATION_STEPS)
+        lr_scheduler build_scheduler(config, optimizer, len(data_loader_train) // config.TRAIN.ACCUMULATION_STEPS)
     else:
-        lr_scheduler, num_epochs = build_scheduler(config, optimizer, len(data_loader_train))
+        lr_scheduler = build_scheduler(config, optimizer, len(data_loader_train))
 
     # build criterion
     if config.AUG.MIXUP > 0.:
@@ -155,6 +155,7 @@ def main(config, logger):
             logger.info(f"Accuracy of model ema: {acc1:.1f}%")
 
     # start training
+    num_epochs = config.TRAIN.EPOCHS + config.TRAIN.COOLDOWN_EPOCHS
     logger.info("Start training")
     start_time = time.time()
     for epoch in range(config.TRAIN.START_EPOCH, num_epochs):
