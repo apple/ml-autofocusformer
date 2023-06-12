@@ -1,0 +1,32 @@
+MODEL:
+  TYPE: aff 
+  NAME: aff_base_22k 
+  DROP_PATH_RATE: 0.2
+  AFF:
+    DEPTHS: [3,4,18,2]
+    NUM_HEADS: [4,8,16,32]
+    MLP_RATIO: 3.
+    EMBED_DIM: [128, 256, 512, 1024]
+    CLUSTER_SIZE: 8
+    NBHD_SIZE: [48,48,48,49]
+    LAYER_SCALE: 1e-5 # turned off if 0.0
+    ALPHA: 4.0
+    DS_RATE: 0.25
+DATA:
+  DATASET: imagenet22k
+  IMG_SIZE: 224 
+  BATCH_SIZE: 64
+  DATA_PATH: path/to/22k
+TRAIN:
+  EPOCHS: 90
+  WARMUP_EPOCHS: 5
+  WEIGHT_DECAY: 0.05
+  BASE_LR: 5e-4
+  MIN_LR: 1.25e-6
+  USE_EMA: False 
+  EMA_DECAY: 0.9998
+  WARMUP_LR: 1.25e-7
+  ACCUMULATION_STEPS: 1
+AUG:
+  MIXUP: 0.8
+  CUTMIX: 1.0
