@@ -40,7 +40,7 @@ Notably, AFF-Small achieves **44.0** instance segmentation AP and **66.9** panop
 
 ## Main Results on ImageNet with Pretrained Models 
 
-| name | pretrain | resolution |acc@1 | acc@5 | #params | FLOPs | FPS| 1K model |
+| name | pretrain | resolution |acc@1 | acc@5 | #params | FLOPs | FPS | 1K model |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | AFF-Mini | ImageNet-1K | 224x224 | 78.2 | 93.6 | 6.75M | 1.08G | 1337 | [Apple ML](https://docs-assets.developer.apple.com/ml-research/models/aff/classification/aff_mini.pth) |
 | AFF-Mini-1/5 | ImageNet-1K | 224x224 | 77.5 | 93.3 | 6.75M | 0.72G | 1678 | [Apple ML](https://docs-assets.developer.apple.com/ml-research/models/aff/classification/aff_mini_1_5th.pth) |
@@ -52,6 +52,10 @@ Notably, AFF-Small achieves **44.0** instance segmentation AP and **66.9** panop
 FPS is obtained on a single V100 GPU.
 
 We train with a total batch size 4096.
+
+| name | pretrain | resolution |acc@1 | acc@5 | #params | FLOPs | 22K model | 1K model |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| AFF-Base | ImageNet-22K | 384x384 | 86.2 | 98.0 | 75.34M | 42.54G | [Apple ML](https://docs-assets.developer.apple.com/ml-research/models/aff/classification/aff_base_22k.pth) | [Apple ML](https://docs-assets.developer.apple.com/ml-research/models/aff/classification/aff_base_22kto1k_384.pth) |
 
 ## Getting Started
 
