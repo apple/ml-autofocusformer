@@ -13,6 +13,7 @@ import torch
 import numpy as np
 import random
 import torch.distributed as dist
+import copy
 
 
 def load_checkpoint(config, model, optimizer, lr_scheduler, loss_scaler, logger, use_ema=False):
@@ -51,6 +52,52 @@ def load_checkpoint(config, model, optimizer, lr_scheduler, loss_scaler, logger,
     torch.cuda.empty_cache()
     return max_accuracy
 
+def load_pretrained(config, model, logger, use_ema=False):
+    logger.info(f"==============> Loading weight {config.MODEL.PRETRAINED} for fine-tuning......")
+    checkpoint = torch.load(config.MODEL.PRETRAINED, map_location='cpu')
+
+    if use_ema:
+        state_dict = checkpoint['model_ema']
+        hw_name = 'module.head.weight'
+        hb_name = 'module.head.bias'
+    else:
+        state_dict = checkpoint['model']
+        hw_name = 'head.weight'
+        hb_name = 'head.bias'
+
+    # check classifier, if not match, then re-init classifier to zero
+    head_bias_pretrained = state_dict[hb_name]
+    Nc1 = head_bias_pretrained.shape[0]
+    Nc2 = model.head.bias.shape[0] if not use_ema else model.module.head.bias.shape[0]
+    if (Nc1 != Nc2):
+        #if Nc1 == 21841 and Nc2 == 1000:
+        if Nc1 == 10450 and Nc2 == 1000:
+            logger.info("loading ImageNet-22K weight to ImageNet-1K ......")
+            map1kto21kp = json.load(open("data/map22kpto1k.txt"))
+            invalid_cls = (torch.Tensor(map1kto21kp) == -1).nonzero()
+            #print("invalid cls",invalid_cls)
+            head_w_mapped = copy.deepcopy(state_dict[hw_name][map1kto21kp, :])
+            head_b_mapped = copy.deepcopy(state_dict[hb_name][map1kto21kp])
+            del state_dict[hw_name]
+            del state_dict[hb_name]
+            state_dict[hw_name] = head_w_mapped
+            state_dict[hb_name] = head_b_mapped
+            state_dict[hw_name][invalid_cls] = 0
+            state_dict[hb_name][invalid_cls] = 0
+        else:
+            torch.nn.init.constant_(model.head.bias if not use_ema else model.module.head.bias, 0.)
+            torch.nn.init.constant_(model.head.weight if not use_ema else model.module.head.weight, 0.)
+            del state_dict[hw_name]
+            del state_dict[hb_name]
+            logger.warning(f"Error in loading classifier head, re-init classifier head to 0")
+
+    msg = model.load_state_dict(state_dict, strict=False)
+    logger.warning(msg)
+
+    logger.info(f"=> loaded successfully '{config.MODEL.PRETRAINED}'")
+
+    del checkpoint
+    torch.cuda.empty_cache()
 
 def save_checkpoint(config, epoch, model, max_accuracy, optimizer, lr_scheduler, loss_scaler, logger, model_ema=None, total_epochs=None):
     if total_epochs is None:

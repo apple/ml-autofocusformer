@@ -26,7 +26,7 @@ from data import build_loader
 from lr_scheduler import build_scheduler
 from optimizer import build_optimizer
 from logger import create_logger
-from utils import load_checkpoint, save_checkpoint, auto_resume_helper, reduce_tensor, get_rank, init_distributed_mode, get_local_rank, get_world_size, NativeScalerWithGradNormCount
+from utils import load_checkpoint, load_pretrained, save_checkpoint, auto_resume_helper, reduce_tensor, get_rank, init_distributed_mode, get_local_rank, get_world_size, NativeScalerWithGradNormCount
 
 torch.backends.cuda.matmul.allow_tf32 = True
 
@@ -49,6 +49,8 @@ def parse_option():
     parser.add_argument('--blr', type=float, help='base learning rate: absolute_lr = base_lr * total_batch_size / 512')
     parser.add_argument('--data-path', type=str, help='path to dataset')
     parser.add_argument('--resume', help='resume from checkpoint')
+    parser.add_argument('--pretrained',
+                        help='pretrained weight from checkpoint, could be imagenet22k pretrained weight')
     parser.add_argument('--accumulation-steps', type=int, help="gradient accumulation steps")
     parser.add_argument('--output', default='output', type=str, metavar='PATH',
                         help='root of output folder, the full path is <output>/<model_name>/<tag> (default: output)')
@@ -142,6 +144,12 @@ def main(config, logger):
         logger.info(f"Accuracy of the network: {acc1:.1f}%")
         if config.EVAL_MODE:
             return
+
+    if config.MODEL.PRETRAINED and (not config.MODEL.RESUME):
+        load_pretrained(config, model_without_ddp, logger)
+        acc1, acc5, loss = validate(config, data_loader_val, model, logger)
+        logger.info(f"Accuracy of the network: {acc1:.1f}%")
+
     # EMA
     model_ema = None
     if config.TRAIN.USE_EMA:
@@ -151,6 +159,10 @@ def main(config, logger):
         if config.MODEL.RESUME:
             load_checkpoint(config, model_ema, None, None, None, logger, use_ema=True)
             logger.info("Validating EMA checkpoint...")
+            acc1, acc5, loss = validate(config, data_loader_val, model_ema.module, logger)
+            logger.info(f"Accuracy of model ema: {acc1:.1f}%")
+        elif config.MODEL.PRETRAINED:
+            load_pretrained(config, model_ema, logger, use_ema=True)
             acc1, acc5, loss = validate(config, data_loader_val, model_ema.module, logger)
             logger.info(f"Accuracy of model ema: {acc1:.1f}%")
 

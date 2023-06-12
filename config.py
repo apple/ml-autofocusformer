@@ -46,6 +46,8 @@ _C.MODEL.TYPE = 'aff'
 _C.MODEL.NAME = 'aff_mini_1_4th'
 # Checkpoint to resume, could be overwritten by command line argument
 _C.MODEL.RESUME = ''
+# could be overwritten by command line argument
+_C.MODEL.PRETRAINED = ''
 # Number of classes, overwritten in data preparation
 _C.MODEL.NUM_CLASSES = 1000
 # Dropout rate
@@ -202,6 +204,8 @@ def update_config(config, args):
         config.TRAIN.BASE_LR = args.blr
     if args.resume:
         config.MODEL.RESUME = args.resume
+    if args.pretrained:
+        config.MODEL.PRETRAINED = args.pretrained
     if args.accumulation_steps:
         config.TRAIN.ACCUMULATION_STEPS = args.accumulation_steps
     if args.output:

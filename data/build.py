@@ -19,6 +19,8 @@ from timm.data.transforms import _str_to_pil_interpolation
 
 from .samplers import SubsetRandomSampler
 
+from .imagenet22k_dataset import IN22KDATASET
+
 
 def build_loader(config):
     config.defrost()
@@ -73,6 +75,14 @@ def build_dataset(is_train, config):
         root = os.path.join(config.DATA.DATA_PATH, prefix)
         dataset = datasets.ImageFolder(root, transform=transform)
         nb_classes = 1000
+    elif config.DATA.DATASET == 'imagenet22k':
+        if is_train:
+            folder_name = 'imagenet21k_train'
+        else:
+            folder_name = 'imagenet21k_val'
+        dataset = IN22KDATASET(config.DATA.DATA_PATH, folder_name, transform)
+        #nb_classes = 21841
+        nb_classes = 10450
     else:
         raise NotImplementedError("We only support ImageNet now.")
 
@@ -120,7 +130,7 @@ def build_transform_imagenet(is_train, config):
 
 
 def build_transform(is_train, config):
-    if config.DATA.DATASET == 'imagenet':
+    if config.DATA.DATASET == 'imagenet' or config.DATA.DATASET == 'imagenet22k':
         return build_transform_imagenet(is_train, config)
     else:
         raise NotImplementedError("We only support ImageNet now.")
