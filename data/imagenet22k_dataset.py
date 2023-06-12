@@ -1,3 +1,11 @@
+# --------------------------------------------------------
+# Swin Transformer
+# Copyright (c) 2021 Microsoft
+# Licensed under The MIT License [see LICENSE for details]
+# Written by Ze Liu
+# --------------------------------------------------------
+# Adapted for AutoFocusFormer by Ziwen 2023
+
 import os
 import json
 import torch.utils.data as data
