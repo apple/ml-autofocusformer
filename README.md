@@ -42,12 +42,12 @@ Notably, AFF-Small achieves **44.0** instance segmentation AP and **66.9** panop
 
 | name | pretrain | resolution |acc@1 | acc@5 | #params | FLOPs | FPS| 1K model |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| AFF-Mini | ImageNet-1K | 224x224 | 78.2 | 93.6 | 6.75M | 1.08G | 1337 | [Box](https://apple.box.com/s/caro7cmxbqgmi6rw8il7x1tzrow7yx6k) |
-| AFF-Mini-1/5 | ImageNet-1K | 224x224 | 77.5 | 93.3 | 6.75M | 0.72G | 1678 | [Box](https://apple.box.com/s/aib6y9l5xywo8zi3xy7gce03m4opmmyv) |
-| AFF-Tiny | ImageNet-1K | 224x224 | 83.0 | 96.3 | 27M | 4G | 528 | [Box](https://apple.box.com/s/084xbpfsjpn3mkv5xiqyyls4pf3vsg6r) |
-| AFF-Tiny-1/5 | ImageNet-1K | 224x224 | 82.4 | 95.9 | 27M | 2.74G | 682 | [Box](https://apple.box.com/s/vg45luh144kbcv7dukgp6tsn0qv0z7ao) |
-| AFF-Small | ImageNet-1K | 224x224 | 83.5 | 96.6 | 42.6M | 8.16G | 321 | [Box](https://apple.box.com/s/yxy1gfhs4b973zvqawlrjgsi50t3fr89) |
-| AFF-Small-1/5 | ImageNet-1K | 224x224 | 83.4 | 96.5 | 42.6M | 5.69G | 424 | [Box](https://apple.box.com/s/m3ylsmst93m4xtmb1v7f046ncj64zufa) |
+| AFF-Mini | ImageNet-1K | 224x224 | 78.2 | 93.6 | 6.75M | 1.08G | 1337 | [Apple ML](https://docs-assets.developer.apple.com/ml-research/models/aff/classification/aff_mini.pth) |
+| AFF-Mini-1/5 | ImageNet-1K | 224x224 | 77.5 | 93.3 | 6.75M | 0.72G | 1678 | [Apple ML](https://docs-assets.developer.apple.com/ml-research/models/aff/classification/aff_mini_1_5th.pth) |
+| AFF-Tiny | ImageNet-1K | 224x224 | 83.0 | 96.3 | 27M | 4G | 528 | [Apple ML](https://docs-assets.developer.apple.com/ml-research/models/aff/classification/aff_tiny.pth) |
+| AFF-Tiny-1/5 | ImageNet-1K | 224x224 | 82.4 | 95.9 | 27M | 2.74G | 682 | [Apple ML](https://docs-assets.developer.apple.com/ml-research/models/aff/classification/aff_tiny_1_5th.pth) |
+| AFF-Small | ImageNet-1K | 224x224 | 83.5 | 96.6 | 42.6M | 8.16G | 321 | [Apple ML](https://docs-assets.developer.apple.com/ml-research/models/aff/classification/aff_small.pth) |
+| AFF-Small-1/5 | ImageNet-1K | 224x224 | 83.4 | 96.5 | 42.6M | 5.69G | 424 | [Apple ML](https://docs-assets.developer.apple.com/ml-research/models/aff/classification/aff_small_1_5th.pth) |
 
 FPS is obtained on a single V100 GPU.
 
