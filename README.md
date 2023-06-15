@@ -5,6 +5,8 @@
 
 AFF-Small: [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/autofocusformer-image-segmentation-off-the/instance-segmentation-on-cityscapes-val)](https://paperswithcode.com/sota/instance-segmentation-on-cityscapes-val?p=autofocusformer-image-segmentation-off-the)
 
+AFF-Base: [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/autofocusformer-image-segmentation-off-the/instance-segmentation-on-cityscapes-val)](https://paperswithcode.com/sota/instance-segmentation-on-cityscapes-val?p=autofocusformer-image-segmentation-off-the) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/autofocusformer-image-segmentation-off-the/panoptic-segmentation-on-cityscapes-val)](https://paperswithcode.com/sota/panoptic-segmentation-on-cityscapes-val?p=autofocusformer-image-segmentation-off-the)
+
 This software project accompanies the research paper, *AutoFocusFormer: Image Segmentation off the Grid* (CVPR 2023).
 
 [Chen Ziwen](https://www.chenziwe.com), Kaushik Patnaik, [Shuangfei Zhai](https://scholar.google.com/citations?user=G6vdBYsAAAAJ&hl=en), [Alvin Wan](http://alvinwan.com), [Zhile Ren](https://jrenzhile.com), [Alex Schwing](https://alexander-schwing.de/), [Alex Colburn](https://www.colburn.org), [Li Fuxin](https://web.engr.oregonstate.edu/~lif/)
